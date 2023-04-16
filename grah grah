@@ -5,6 +5,7 @@ if game.PlaceId == 8750997647 then
     --variables
     _G.autoclick = true
     _G.autorebirth = true
+    _G.autoreberth = true
    
 
     --functions
@@ -22,7 +23,13 @@ if game.PlaceId == 8750997647 then
         end  
     end
 
-  
+    function autoreberth()
+        while _G.autoreberth == true do
+            game:GetService("ReplicatedStorage").Remotes.Rebirth:FireServer(5)
+            wait(0.000001)
+        end
+    end
+    
 
     --tabs
     local Tab = Window:MakeTab({
@@ -56,8 +63,17 @@ if game.PlaceId == 8750997647 then
         end    
     })
 
-    
+    Tab:AddToggle({
+        Name = "autoreberth 2",
+        Default = false,
+        Callback = function(Value)
+           _G.autoreberth = Value
+           autoreberth()
+        end    
+    })
 
+    
+-- teleport
     teleport:AddButton({
         Name = "TP to Upgrade",
         Callback = function()
@@ -83,6 +99,5 @@ if game.PlaceId == 8750997647 then
             teleportto(game:GetService("Workspace").UIProx.TapSkins.CFrame)
           end    
     })
-
 end
 OrionLib:Init()
