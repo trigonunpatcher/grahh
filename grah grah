@@ -1,0 +1,88 @@
+if game.PlaceId == 8750997647 then
+    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+    local Window = OrionLib:MakeWindow({Name = "TroysHub | Tapping Legends X", HidePremium = false,IntroText = "troysHub", SaveConfig = true, ConfigFolder = "OrionTest"})
+    
+    --variables
+    _G.autoclick = true
+    _G.autorebirth = true
+   
+
+    --functions
+    function autoclick()
+        while _G.autoclick == true do
+        game:GetService("ReplicatedStorage").Remotes.Tap:FireServer()
+           wait(0.000001)
+        end
+    end
+
+    function autorebirth()
+        while _G.autorebirth == true do
+        game:GetService("ReplicatedStorage").Remotes.Rebirth:FireServer(1)
+        wait(0.000001)
+        end  
+    end
+
+  
+
+    --tabs
+    local Tab = Window:MakeTab({
+        Name = "Tab 1",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+
+    local teleport = Window:MakeTab({
+        Name = "teleporting(W.I.P)",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    })
+
+    --toggles
+    Tab:AddToggle({
+        Name = "autoclick",
+        Default = false,
+        Callback = function(Value)
+            _G.autoclick = Value
+            autoclick()
+        end    
+    })
+
+    Tab:AddToggle({
+        Name = "autorebirth",
+        Default = false,
+        Callback = function(Value)
+            _G.autorebirth = Value
+            autorebirth()
+        end    
+    })
+
+    
+
+    teleport:AddButton({
+        Name = "TP to Upgrade",
+        Callback = function()
+            function teleportto(placeCFRAME)
+                local plyr = Game.Players.LocalPlayer
+                if plyr.Character then
+                 plyr.Character.HumanoidRootPart.CFrame = placeCFRAME
+                end
+             end
+            teleportto(game:GetService("Workspace").UIProx.Upgrades.CFrame)  
+          end    
+    })
+
+    teleport:AddButton({
+        Name = "TP to skins",
+        Callback = function()
+            function teleportto(placeCFRAME)
+                local plyr = Game.Players.LocalPlayer
+                if plyr.Character then
+                 plyr.Character.HumanoidRootPart.CFrame = placeCFRAME
+                end
+             end
+            teleportto(game:GetService("Workspace").UIProx.TapSkins.CFrame)
+          end    
+    })
+
+end
+OrionLib:Init()
